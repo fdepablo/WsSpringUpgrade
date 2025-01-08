@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="director" class="modelo.entidad.Director" scope="prototype">
+		<property name="nombre" value=""></property>
+	</bean>
+
+	<bean id="pelicula" class="modelo.entidad.Pelicula" scope="prototype">
+		<property name="titulo" value=""></property>
+		<property name="director" ref="director"></property>
+	</bean>
+	
+	<bean id="titanic" class="modelo.entidad.Pelicula">
+		<property name="director" ref="cameron"></property>
+	</bean>
+	
+	<bean id="cameron" class="modelo.entidad.Director">
+		<property name="nombre" value="James Cameron"></property>
+		<property name="edad" value="70"></property>
+	</bean>
+</beans>

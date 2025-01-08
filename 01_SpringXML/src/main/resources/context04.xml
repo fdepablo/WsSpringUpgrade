@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Spring puede dar de alta beans con diferentes estructuras de datos
+	como por ejeplo listas y hashmaps
+	 -->
+	 
+	<bean id="listaNombres" class="java.util.ArrayList">
+		<constructor-arg>
+			<list value-type="java.lang.String">
+				<value>Manuel</value>
+				<value>Felipe</value>
+				<value>Marta</value>
+				<value>Lucia</value>			
+			</list>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="pepe" class="modelo.entidad.Persona">
+		<property name="nombre" value="Pepito Grillo"></property>
+		<property name="edad" value="467"></property>
+		<property name="peso" value="0.5"></property>
+	</bean>
+	
+	<bean id="bambi" class="modelo.entidad.Persona">
+		<property name="nombre" value="Bambi"></property>
+		<property name="edad" value="2"></property>
+		<property name="peso" value="12"></property>
+	</bean>
+	
+	<bean id="listaPersonas" class="java.util.ArrayList">
+		<constructor-arg>
+			<list value-type="modelo.entidad.Persona">
+				<ref bean="pepe"/>
+				<ref bean="bambi"/>
+			</list>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="persona" class="modelo.entidad.Persona" scope="prototype">
+	</bean>
+	
+	<bean id="listaPersonas2" class="java.util.ArrayList">
+		<constructor-arg>
+			<list value-type="modelo.entidad.Persona">
+				<ref bean="persona"/>
+				<ref bean="persona"/>
+			</list>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="mapaPersonas" class="java.util.HashMap">
+		<constructor-arg>
+			<map key-type="java.lang.Integer" value-type="modelo.entidad.Persona">
+				<entry key="1" value-ref="pepe"></entry>
+				<entry key="2" value-ref="bambi"></entry>
+			</map>
+		</constructor-arg>
+	</bean>
+	
+</beans>
