@@ -1,75 +1,52 @@
-![JAVA](img/java.jpg "JAVA")
+# Spring
 
-# Java
-La plataforma Java es el nombre de un entorno de computación originaria de Sun Microsystems, capaz de ejecutar aplicaciones desarrolladas usando el lenguaje de programación Java u otros lenguajes que compilen a bytecode y un conjunto de herramientas de desarrollo. En este caso, la plataforma no es un hardware específico o un sistema operativo, sino más bien una máquina virtual encargada de la ejecución de las aplicaciones, y un conjunto de bibliotecas estándar que ofrecen una funcionalidad común.
+Spring es un framework para el desarrollo de aplicaciones y contenedor de inversión de control, de código abierto para la plataforma Java 
 
-Aqui vamos a encontrar un repositorio de eclipse con teoria y ejemplos sobre java
+## Spring fundamentos
 
-# Versiones usadas en el repositorio
-- Java 21 (aunque hay algún proyecto en la version 1.8)
-- Tomcat 9.0
+El corazón de Spring Framework es su contenedor de inversión de control (IoC). Su trabajo es instanciar, inicializar y conectar objetos de la aplicación, además de proveer una serie de características adicionales disponibles en Spring a través del tiempo de vida de los objetos.
 
-# Instalación y configuración
-Lo primero, asegurate que tienes java con su correspondiente versión instalada en el ordenador. Puede funcionar tambien para otras versiones anteriores de java, pero es posible que de algún problema. Si tienes una versión posterior no debería de dar ningún problema.
+En una aplicacion Spring pura, podemos desarrolar todo nuestro codigo sin necesidad de que el programador haga "news" de los objetos, será el contenedor de spring el que haga este trabajo. Nosotros como programadores, programaremos los objetos o las clases pero el control del ciclo de vida de los objetos ser encargara Spring
 
-Para comprobar que versión tienes instada de java puede ejecutar el siguiente comando en una 
-ventana de linea de comandos "cmd"
+La inversion de control es un concepto el cual el programador no tiene el control sobre el ciclo de vida del objeto, sino que es otra entidad el que lo tiene (en este caso, Spring)
 
-    java -version
-	
-En caso de que no tengas instalada la versión 17 puedes bajartela del siguiente enlace:
+1. La instanciacion de los objeto corre a cargo de una clase llamada BeanFactory. En principio tenemo tres maneras de dar de alta los objetos en el contexto de spring. 
+    - La primera sería a traves de XML
+    - la segunda sería a traves de anotaciones. 
+    - La tercera basandonos en objetos Java (desde Spring 3.0)
 
-- [https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
+Cuando nosotros tabajamos con objetos dentro del contexto de Spring, los objetos dejan de ser anonimos y pasan a tener un identificador unico, de tal manera que podemos pedirle al contexto de spring ese objeto siempre que queramos.
 
-El siguiente paso es decargarte este workspace desde git. Puedes hacerlo clonando el repositorio o puedes hacerlo simplemente bajandote el .zip y descomprimirlo.
+2. El lugar donde se van a guardar los objetos, es el ApplicationContext, que podemos darlo de alta a traves de un XML o a traves de anotaciones. El contenedor es unico para toda la aplicacion. El usuario puede usar el formato que desee para dar de alta los ojbetos e incluso mezclarlos en la misma aplicación.​
 
-- [https://github.com/fdepablo/WorkspaceJava](https://github.com/fdepablo/WorkspaceJava)
+Los objetos creados y gestionados por el contenedor se denominan objetos gestionados o beans. Estos objetos normalmente son del tipo POJO (Plain Old Java Object), es decir, objeto sencillos que no tienen herencias ni interfaces.
+​
+Los objetos pueden ser obtenidos por búsqueda de dependencias o por inyección de dependencias. 
 
-Arranca eclipse y selecciona la carpeta raiz del workspace que te has descargado
-previamente y has descomprimido.
+1. búsqueda de dependencias es un modelo donde se pide al objeto contenedor un objeto con un nombre específico o de un tipo específico, ya que recordemos que los beans en spring no son anonimos como en java. i
+2. inyección de dependencias es un modelo en el que el contenedor pasa objetos por nombre a otros objetos, ya sea a través de métodos constructores, propiedades, o métodos de la fábrica.
 
-Una vez abierto el workspace tienes que importar todos los proyectos que están dento de la carpeta, ya que por defecto eclipse no los importa. Sigue los siguientes pasos:
-1. En la pestaña de Project Explorer de la derecha pulsamos -> import projects -> General -> Existing Projects into Workpace
-2. Con la opcion "Select root directory" pulsamos Browse y seleccionamos nuestra carpeta
-raiz donde estan todos estos ejemplos
-3. Hecho esto, se nos deberán cargar todos los proyectos en la parte de "Projects", deberan estar todos seleccionados
-4. Pulsamos el boton "Finish"
-5. Debemos de ver todos los proyectos ahora en la pestaña "Project Explorer"
+## Configurar un proyecto Spring
 
-Una vez hecho esto es posible que los proyectos den problemas debido a que estés usando otra versión de JAVA o tengas instalado java en una ruta diferente a la mia.
+Tenemos que bajarnos la librerías con el contexto de spring. Normalmente haremos esto mediante maven y actualizaremos la version de java
 
-Para ello deberás comprobar que el build path de java este correctamente configurado, para
-ello hacemos los siguientes pasos.
+	  <properties>
+	    <maven.compiler.source>11</maven.compiler.source>
+	    <maven.compiler.target>11</maven.compiler.target>
+	  </properties>
+	  
+	  <dependencies>
+	  	<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-context</artifactId>
+		    <version>5.2.18.RELEASE</version>
+		</dependency>
+	  	
+	  </dependencies>
+	  
+Tambien se recomienda tener el plugin de eclipse llamado "Spring Tools 4" que se puede bajar del marketplace de Eclips -> help | Eclipse Marketplace
 
-1. Botón derecho sobre el proyecto.
-2. Pulsamos -> Build path -> configure Build Path y se abrirá una ventana
-3. En la ventana vamos a la pestaña -> libraries y comprobamos que no hay errores
-4. Es posible que de error en la librería java, para solucionarlo pulsamos sobre la librería java y a continuación pulsamos en -> Edit
-5. Se abrirá una nueva ventana en la que podemos decirle a eclipse que coja la versión de java que queramos. En principio podemos coger "Workpace default JRE" que sería la versión de java que usa eclipse para este workspace en concreto. Repetiriamos este paso para todos los proyectos que lo necesitemos.
+## Ejemplos spring
 
-Si algun proyecto aparece con errores, debemos leer su README.md para solucionarlo
-
-## Codificación de caracteres en Eclipse
-
-La mayoría de este workspace está codificado en **UTF-8** por lo que es posible que si se usa otra codificación las tildes u otros caracteres se vean mal. Eclipse, por ejemplo, usa la codificación **Cp1252** por defecto en todos los workspace.
-
-Para cambiar la codificación de un workspace en eclipse realizar los siguientes pasos:
-
-	Window -> Preferences -> General -> Workspace : Text file encoding
-	
-Una vez ahí, seleccionar el de su preferencia (UTF-8 en este caso)
-	
-![UTF8](img/UTF8.png "UTF8")
-
-Es posible que en las últimas versiones de Eclipse ya este configurado en **UTF-8** y no haga falta hacer este paso.
-
-## Visualizar ficheros MarkDown(.md) en las últimas versiones de Eclipse
-
-Las últimas versiones de Eclipse no incluyen un visualizador de ficheros MarkDown, por lo que se tiene que instalar un plugin aparte para poder visualizarlos. El siguiente enlace proporciona información para su instalación:
-
-- [https://stackoverflow.com/questions/72673235/what-happened-to-eclipse-markdown-editor-in-2022-06](https://stackoverflow.com/questions/72673235/what-happened-to-eclipse-markdown-editor-in-2022-06)
-
-## Bibliografia
-
-- [https://docs.oracle.com/en/java/](https://docs.oracle.com/en/java/)
-
+En este proyecto tenemos diferentes ejemplos sobre los distintos casos de dar de alta el contexto de aplicacion por XML y los beans (objetos spring) por XML.
