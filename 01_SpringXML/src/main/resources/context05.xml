@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 
+	La manera más habitual de hacer ID (inyecciones de dependecias) en spring
+	es mediante el concepto de "autowired"
+	
+	Si configuramos un bean con la propiedad "autowired" buscará automáticamente
+	todas sus dependencias de objetos en el contexto de spring y se las inyectará
+	automáticamente
+	 -->
+	 
+	<bean id="director" class="modelo.entidad.Director">
+		<property name="nombre" value="James Cameron"></property>
+	</bean>
+	
+	<bean id="productor" class="modelo.entidad.Persona">
+		<property name="nombre" value="Macias"></property>
+	</bean>
+
+	<bean id="pelicula" class="modelo.entidad.Pelicula" autowire="byType">
+		<property name="titulo" value=""></property>
+	</bean>
+	
+</beans>
