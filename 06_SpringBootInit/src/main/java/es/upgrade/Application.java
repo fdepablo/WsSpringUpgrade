@@ -47,8 +47,10 @@ public class Application {
 	}
 	
 	@Bean
-	private Director director2() {
-		return new Director();
+	public Director director2() {
+		Director d = new Director();
+		d.setNombre("George Lucas");
+		return d;
 	}
 
 }

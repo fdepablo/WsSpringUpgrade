@@ -1,13 +1,11 @@
 package es.upgrade.modelo.entidades;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Director {
 	private int id;
-	@Value("Steven Spielberg")
-	private String nombre;
+	private String nombre = "Steven Spielberg";
 	
 	public int getId() {
 		return id;
