@@ -13,6 +13,9 @@ public class MainJavaConfig01 {
 
 		Pelicula p = context.getBean("pelicula1",Pelicula.class);
 		System.out.println(p);
+		
+		Pelicula p2 = context.getBean("pelicula2", Pelicula.class);
+		System.out.println(p2);
 	}
 
 }
